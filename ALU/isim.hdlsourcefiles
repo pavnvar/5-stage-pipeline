@@ -7,4 +7,5 @@ C:/Xilinx/ALU/bitwisexnor_64bits.v
 C:/Xilinx/ALU/bitwiseor_64bit.v
 C:/Xilinx/ALU/fs_64bit.v
 C:/Xilinx/ALU/FA_64bit_sync.v
+C:/Xilinx/ALU/alu_8op.v
 C:/Xilinx/ALU/alu_8op_tb.v

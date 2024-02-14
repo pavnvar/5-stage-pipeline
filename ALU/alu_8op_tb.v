@@ -29,7 +29,7 @@ module alu_8op_tb;
 	reg [63:0] B;
 	reg [5:0] Shiftamt;
 	reg [2:0] Sel;
-
+   reg clk;
 	// Outputs
 	wire [63:0] Output;
 
@@ -39,9 +39,16 @@ module alu_8op_tb;
 		.B(B), 
 		.Shiftamt(Shiftamt), 
 		.Sel(Sel), 
-		.Output(Output)
+		.Output(Output),
+		.clk(clk)
 	);
-
+   initial begin
+	 clk=0;
+	 while(1) begin
+	   #20;
+	   clk = ~clk;
+	 end
+	end
 	initial begin
     // Initialize Inputs
     A = 64'hAAAA_BBBB_CCCC_DDDD;

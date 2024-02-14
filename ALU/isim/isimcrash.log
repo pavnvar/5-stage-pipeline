@@ -2,11 +2,3 @@ Exception at PC 0x7C812FD3
 Unknown signal -529697949 received
 Printing stacktrace...
 
-Done
-Unable to capture context for thread 2056 in process 3724, can not generate back trace
-Exception at PC 0x004C2171
-Signal EXCEPTION_ACCESS_VIOLATION received
-Attemped to read address 0x00000004
-Printing stacktrace...
-
-Done

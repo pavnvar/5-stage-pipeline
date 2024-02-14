@@ -23,11 +23,12 @@ module alu_8op(
     input [63:0] B,
     input [5:0] Shiftamt,
     input [2:0] Sel,
-    output [63:0] Output
+	 input clk,
+    output reg [63:0] Output
     );
 
 
-   wire [63:0] Sum, Diff,BAnd,Bor,BXnor,Comp,Shiftop;
+   wire [63:0] Sum, Diff,BAnd,Bor,BXnor,Comp,Shiftop,Outputtmp;
    wire Carry, Borrow;
    // Instantiate the module
 	FA_64bit_sync adder (
@@ -93,12 +94,14 @@ module alu_8op(
 		 .G(Shiftop), 
 		 .H(64'h0000_0000_0000_0000), 
 		 .S(Sel), 
-		 .Output(Output)
+		 .Output(Outputtmp)
 		 );
+  
 
 
-
-	
+	always @(posedge clk) begin
+			Output <= Outputtmp; 
+	end
 	
 
 endmodule

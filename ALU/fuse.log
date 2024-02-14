@@ -36,15 +36,15 @@ Saving Verilog parse-tree work.alu_8op_tb into
 c:/xilinx/alu/isim/work/alu_8op_tb.sdb
 Saving Verilog parse-tree work.glbl into c:/xilinx/alu/isim/work/glbl.sdb
 Starting static elaboration
-WARNING:HDLCompiler:189 - "alu_8op.v" Line 36. Actual bit length 32 differs from
+WARNING:HDLCompiler:189 - "alu_8op.v" Line 37. Actual bit length 32 differs from
    formal bit length 1 for port Cin
 WARNING:HDLCompiler:189 - "FA_64bit_sync.v" Line 46. Actual bit length 32
    differs from formal bit length 1 for port Cin
-WARNING:HDLCompiler:189 - "alu_8op.v" Line 46. Actual bit length 32 differs from
+WARNING:HDLCompiler:189 - "alu_8op.v" Line 47. Actual bit length 32 differs from
    formal bit length 1 for port Bin
 Completed static elaboration
 Fuse Memory Usage: 53900 Kb
-Fuse CPU Usage: 130 ms
+Fuse CPU Usage: 70 ms
 Compiling module glbl
 Compiling module full_adder_1_bit
 Compiling module FA_64bit_sync
@@ -61,4 +61,4 @@ Compiling module alu_8op_tb
 Compiled 13 Verilog Units
 Built simulation executable alu_8op_tb_isim_beh.exe
 Fuse Memory Usage: 55184 Kb
-Fuse CPU Usage: 150 ms
+Fuse CPU Usage: 100 ms
