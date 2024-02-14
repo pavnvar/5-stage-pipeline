@@ -1,0 +1,1 @@
+xst -ise "C:/Xilinx/ALU/ALU.ise" -intstyle ise -ifn "C:/Xilinx/ALU/full_adder_1_bit.xst" -ofn "C:/Xilinx/ALU/full_adder_1_bit.syr"

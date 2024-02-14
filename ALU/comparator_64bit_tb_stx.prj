@@ -1,0 +1,5 @@
+verilog isim_temp "fs_1bit.v"
+verilog isim_temp "fs_64bit.v"
+verilog isim_temp "comparator_64bit.v"
+verilog isim_temp "comparator_64bit_tb.v"
+verilog isim_temp "C:/Xilinx/10.1/ISE/verilog/src/glbl.v"

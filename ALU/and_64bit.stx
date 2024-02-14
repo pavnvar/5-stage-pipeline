@@ -1,0 +1,27 @@
+Release 10.1 - xst K.31 (nt)
+Copyright (c) 1995-2008 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to ./xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.02 secs
+ 
+--> 
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling verilog file "and_64bit.v" in library work
+ERROR:HDLCompilers:26 - "and_64bit.v" line 29 unexpected token: 'B'
+ERROR:HDLCompilers:26 - "and_64bit.v" line 35 expecting ';', found 'EOF'
+ERROR:HDLCompilers:26 - "and_64bit.v" line 35 expecting 'end', found 'EOF'
+Module <and_64bit> compiled
+ERROR:HDLCompilers:26 - "and_64bit.v" line 35 expecting 'endmodule', found 'EOF'
+Analysis of file <"and_64bit.prj"> failed.
+--> 
+
+Total memory usage is 103104 kilobytes
+
+Number of errors   :    4 (   0 filtered)
+Number of warnings :    0 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+

@@ -1,0 +1,12 @@
+[Inputs]
+Bin
+clk
+=A[63:0]=
+=B[63:0]=
+[Outputs]
+Bout
+=Diff[63:0]=
+[BiDir]
+[ATTRIBUTES]
+VeriModel fs_64bit
+

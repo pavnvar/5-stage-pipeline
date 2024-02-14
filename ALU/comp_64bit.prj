@@ -1,0 +1,3 @@
+verilog work "fs_1bit.v"
+verilog work "fs_64bit.v"
+verilog work "comp_64bit.v"

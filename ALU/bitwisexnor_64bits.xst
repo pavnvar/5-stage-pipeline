@@ -1,0 +1,4 @@
+set -tmpdir "./xst/projnav.tmp"
+elaborate
+-ifn bitwisexnor_64bits.prj
+-ifmt mixed

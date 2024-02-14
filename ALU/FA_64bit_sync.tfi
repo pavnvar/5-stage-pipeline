@@ -1,0 +1,13 @@
+
+
+
+// Instantiate the module
+FA_64bit_sync instance_name (
+    .A(A), 
+    .B(B), 
+    .Cin(Cin), 
+    .Carry(Carry), 
+    .Sum(Sum)
+    );
+
+

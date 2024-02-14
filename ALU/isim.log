@@ -1,0 +1,45 @@
+Command line:
+   ./alu_8op_tb_isim_beh.exe
+     -intstyle  ise
+     -ipchost  localhost
+     -ipcport  1409
+WARNING:Simulator:678 -  For instance
+   adder/\genFA[0].first_1_bit_adder.instance_name /, width 1 of formal port Cin
+   is not equal to width 32 of actual signal implSig1.
+WARNING:Simulator:678 -  For instance uut/adder/, width 1 of formal port Cin is
+   not equal to width 32 of actual signal implSig1.
+WARNING:Simulator:678 -  For instance uut/subtractor/, width 1 of formal port
+   Bin is not equal to width 32 of actual signal implSig2.
+
+Wed Feb 14 03:02:49 2024
+
+Total Line Count : 85
+
+ Elaboration Time: 0.010014 sec
+
+ Current Memory Usage: 145.101 Meg
+
+ Total Signals          : 2061
+ Total Nets             : 2294
+ Total Signal Drivers   : 1240
+ Total Blocks           : 204
+ Total Primitive Blocks : 198
+ Total Processes        : 1244
+ Total Traceable Variables  : 22
+ Total Scalar Nets and Variables : 2574
+ntrace select -o on -n /alu_8op_tb/Output 
+ntrace select -o on -n /alu_8op_tb/A 
+ntrace select -o on -n /alu_8op_tb/B 
+ntrace select -o on -n /alu_8op_tb/Shiftamt 
+ntrace select -o on -n /alu_8op_tb/Sel 
+ntrace start 
+isimrun 2000 ns 
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+
+ Total Simulation Time: 0.060087 sec
+
+ Current Memory Usage: 159.31 Meg
+
+Wed Feb 14 03:14:46 2024
+

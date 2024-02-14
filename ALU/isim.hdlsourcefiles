@@ -1,0 +1,10 @@
+C:/Xilinx/10.1/ISE/verilog/src/glbl.v
+C:/Xilinx/ALU/mux_64bit_8to1.v
+C:/Xilinx/ALU/logicalshift_64bit.v
+C:/Xilinx/ALU/comp_64bit.v
+C:/Xilinx/ALU/bitwiseand_64bit.v
+C:/Xilinx/ALU/bitwisexnor_64bits.v
+C:/Xilinx/ALU/bitwiseor_64bit.v
+C:/Xilinx/ALU/fs_64bit.v
+C:/Xilinx/ALU/FA_64bit_sync.v
+C:/Xilinx/ALU/alu_8op_tb.v

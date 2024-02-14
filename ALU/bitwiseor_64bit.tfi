@@ -1,0 +1,11 @@
+
+
+
+// Instantiate the module
+bitwiseor_64bit instance_name (
+    .A(A), 
+    .B(B), 
+    .out(out)
+    );
+
+
