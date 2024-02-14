@@ -1,0 +1,5 @@
+verilog work "fs_1bit.v"
+verilog work "fs_64bit.v"
+verilog work "comparator_64bit.v"
+verilog work "comparator_64bit_tb.v"
+verilog work "C:/Xilinx/10.1/ISE/verilog/src/glbl.v"

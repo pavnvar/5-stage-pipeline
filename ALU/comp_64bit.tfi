@@ -1,0 +1,11 @@
+
+
+
+// Instantiate the module
+comp_64bit instance_name (
+    .A(A), 
+    .B(B), 
+    .outp(outp)
+    );
+
+

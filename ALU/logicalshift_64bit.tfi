@@ -1,0 +1,11 @@
+
+
+
+// Instantiate the module
+logicalshift_64bit instance_name (
+    .data(data), 
+    .shift_amount(shift_amount), 
+    .shifted_data(shifted_data)
+    );
+
+

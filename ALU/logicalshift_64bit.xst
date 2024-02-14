@@ -1,0 +1,4 @@
+set -tmpdir "./xst/projnav.tmp"
+elaborate
+-ifn logicalshift_64bit.prj
+-ifmt mixed

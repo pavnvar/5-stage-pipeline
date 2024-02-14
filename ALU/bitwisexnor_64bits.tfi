@@ -1,0 +1,11 @@
+
+
+
+// Instantiate the module
+bitwisexnor_64bits instance_name (
+    .A(A), 
+    .B(B), 
+    .out(out)
+    );
+
+
