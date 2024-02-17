@@ -1,2 +1,0 @@
-xst -ise "C:/Xilinx/ALU/ALU.ise" -intstyle ise -ifn "C:/Xilinx/ALU/FA_64bit_sync.xst" -ofn "C:/Xilinx/ALU/FA_64bit_sync.syr"
-netgen -ise "C:/Xilinx/ALU/ALU.ise" -intstyle ise -insert_glbl true -w -dir netgen/synthesis -ofmt verilog -sim FA_64bit_sync.ngc FA_64bit_sync_synthesis.v

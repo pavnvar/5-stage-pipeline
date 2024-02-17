@@ -1,45 +1,38 @@
 Command line:
-   ./alu_8op_tb_isim_beh.exe
+   ./alu_tb_isim_beh.exe
      -intstyle  ise
      -ipchost  localhost
-     -ipcport  1041
-WARNING:Simulator:678 -  For instance
-   adder/\genFA[0].first_1_bit_adder.instance_name /, width 1 of formal port Cin
-   is not equal to width 32 of actual signal implSig1.
+     -ipcport  1040
 WARNING:Simulator:678 -  For instance uut/adder/, width 1 of formal port Cin is
    not equal to width 32 of actual signal implSig1.
 WARNING:Simulator:678 -  For instance uut/subtractor/, width 1 of formal port
    Bin is not equal to width 32 of actual signal implSig2.
 
-Wed Feb 14 03:47:38 2024
+Fri Feb 16 23:56:11 2024
 
-Total Line Count : 92
+Total Line Count : 353
 
- Elaboration Time: 0.020028 sec
+ Elaboration Time: 0 sec
 
- Current Memory Usage: 145.105 Meg
+ Current Memory Usage: 144.122 Meg
 
- Total Signals          : 2063
- Total Nets             : 2359
- Total Signal Drivers   : 1242
- Total Blocks           : 204
- Total Primitive Blocks : 198
- Total Processes        : 1248
+ Total Signals          : 793
+ Total Nets             : 1945
+ Total Signal Drivers   : 735
+ Total Blocks           : 77
+ Total Primitive Blocks : 72
+ Total Processes        : 741
  Total Traceable Variables  : 24
- Total Scalar Nets and Variables : 2704
-ntrace select -o on -n /alu_8op_tb/Output 
-ntrace select -o on -n /alu_8op_tb/A 
-ntrace select -o on -n /alu_8op_tb/B 
-ntrace select -o on -n /alu_8op_tb/Shiftamt 
-ntrace select -o on -n /alu_8op_tb/Sel 
+ Total Scalar Nets and Variables : 2290
+ntrace select -o on -m / -l this 
 ntrace start 
 isimrun 2000 ns 
 Simulator is doing circuit initialization process.
 Finished circuit initialization process.
 
- Total Simulation Time: 0.040058 sec
+ Total Simulation Time: 0.030043 sec
 
- Current Memory Usage: 157.688 Meg
+ Current Memory Usage: 152.51 Meg
 
-Wed Feb 14 03:47:50 2024
+Fri Feb 16 23:58:52 2024
 

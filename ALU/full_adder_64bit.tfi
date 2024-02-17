@@ -1,0 +1,13 @@
+
+
+
+// Instantiate the module
+full_adder_64bit instance_name (
+    .A(A), 
+    .B(B), 
+    .Cin(Cin), 
+    .Sum(Sum), 
+    .Carry(Carry)
+    );
+
+

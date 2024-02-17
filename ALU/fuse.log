@@ -1,64 +1,59 @@
 Determining compilation order of HDL files
 Analyzing Verilog file fs_1bit.v
-Analyzing Verilog file full_adder_1_bit.v
+Analyzing Verilog file full_adder_64bit.v
 Analyzing Verilog file fs_64bit.v
 Analyzing Verilog file mux_64bit_8to1.v
 Analyzing Verilog file logicalshift_64bit.v
-Analyzing Verilog file FA_64bit_sync.v
+Analyzing Verilog file full_subtractor_64bit.v
 Analyzing Verilog file comp_64bit.v
 Analyzing Verilog file bitwisexnor_64bits.v
 Analyzing Verilog file bitwiseor_64bit.v
 Analyzing Verilog file bitwiseand_64bit.v
-Analyzing Verilog file alu_8op.v
-Analyzing Verilog file alu_8op_tb.v
+Analyzing Verilog file alu.v
+Analyzing Verilog file alu_tb.v
 Analyzing Verilog file C:/Xilinx/10.1/ISE/verilog/src/glbl.v
-Saving Verilog parse-tree work.fs_1bit into c:/xilinx/alu/isim/work/fs_1bit.sdb
-Saving Verilog parse-tree work.full_adder_1_bit into
-c:/xilinx/alu/isim/work/full_adder_1_bit.sdb
-Saving Verilog parse-tree work.fs_64bit into
-c:/xilinx/alu/isim/work/fs_64bit.sdb
+Saving Verilog parse-tree work.fs_1bit into c:/alu/isim/work/fs_1bit.sdb
+Saving Verilog parse-tree work.full_adder_64bit into
+c:/alu/isim/work/full_adder_64bit.sdb
+Saving Verilog parse-tree work.fs_64bit into c:/alu/isim/work/fs_64bit.sdb
 Saving Verilog parse-tree work.mux_64bit_8to1 into
-c:/xilinx/alu/isim/work/mux_64bit_8to1.sdb
+c:/alu/isim/work/mux_64bit_8to1.sdb
 Saving Verilog parse-tree work.logicalshift_64bit into
-c:/xilinx/alu/isim/work/logicalshift_64bit.sdb
-Saving Verilog parse-tree work.FA_64bit_sync into
-c:/xilinx/alu/isim/work/@f@a_64bit_sync.sdb
-Saving Verilog parse-tree work.comp_64bit into
-c:/xilinx/alu/isim/work/comp_64bit.sdb
+c:/alu/isim/work/logicalshift_64bit.sdb
+Saving Verilog parse-tree work.full_subtractor_64bit into
+c:/alu/isim/work/full_subtractor_64bit.sdb
+Saving Verilog parse-tree work.comp_64bit into c:/alu/isim/work/comp_64bit.sdb
 Saving Verilog parse-tree work.bitwisexnor_64bits into
-c:/xilinx/alu/isim/work/bitwisexnor_64bits.sdb
+c:/alu/isim/work/bitwisexnor_64bits.sdb
 Saving Verilog parse-tree work.bitwiseor_64bit into
-c:/xilinx/alu/isim/work/bitwiseor_64bit.sdb
+c:/alu/isim/work/bitwiseor_64bit.sdb
 Saving Verilog parse-tree work.bitwiseand_64bit into
-c:/xilinx/alu/isim/work/bitwiseand_64bit.sdb
-Saving Verilog parse-tree work.alu_8op into c:/xilinx/alu/isim/work/alu_8op.sdb
-Saving Verilog parse-tree work.alu_8op_tb into
-c:/xilinx/alu/isim/work/alu_8op_tb.sdb
-Saving Verilog parse-tree work.glbl into c:/xilinx/alu/isim/work/glbl.sdb
+c:/alu/isim/work/bitwiseand_64bit.sdb
+Saving Verilog parse-tree work.alu into c:/alu/isim/work/alu.sdb
+Saving Verilog parse-tree work.alu_tb into c:/alu/isim/work/alu_tb.sdb
+Saving Verilog parse-tree work.glbl into c:/alu/isim/work/glbl.sdb
 Starting static elaboration
-WARNING:HDLCompiler:189 - "alu_8op.v" Line 37. Actual bit length 32 differs from
+WARNING:HDLCompiler:189 - "alu.v" Line 38. Actual bit length 32 differs from
    formal bit length 1 for port Cin
-WARNING:HDLCompiler:189 - "FA_64bit_sync.v" Line 46. Actual bit length 32
-   differs from formal bit length 1 for port Cin
-WARNING:HDLCompiler:189 - "alu_8op.v" Line 47. Actual bit length 32 differs from
+WARNING:HDLCompiler:189 - "alu.v" Line 47. Actual bit length 32 differs from
    formal bit length 1 for port Bin
 Completed static elaboration
 Fuse Memory Usage: 53900 Kb
-Fuse CPU Usage: 70 ms
+Fuse CPU Usage: 110 ms
 Compiling module glbl
-Compiling module full_adder_1_bit
-Compiling module FA_64bit_sync
-Compiling module fs_1bit
-Compiling module fs_64bit
+Compiling module full_adder_64bit
+Compiling module full_subtractor_64bit
 Compiling module bitwiseor_64bit
 Compiling module bitwisexnor_64bits
 Compiling module bitwiseand_64bit
+Compiling module fs_1bit
+Compiling module fs_64bit
 Compiling module comp_64bit
 Compiling module logicalshift_64bit
 Compiling module mux_64bit_8to1
-Compiling module alu_8op
-Compiling module alu_8op_tb
+Compiling module alu
+Compiling module alu_tb
 Compiled 13 Verilog Units
-Built simulation executable alu_8op_tb_isim_beh.exe
-Fuse Memory Usage: 55184 Kb
-Fuse CPU Usage: 100 ms
+Built simulation executable alu_tb_isim_beh.exe
+Fuse Memory Usage: 59600 Kb
+Fuse CPU Usage: 210 ms
