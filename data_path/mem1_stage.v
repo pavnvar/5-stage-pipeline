@@ -30,9 +30,19 @@ module mem1_stage
 
     output wire [DATA_WIDTH-1:0]        out_data,
 
+    // Data memory interface
+    output wire [THREAD_INDEX_BITS+DATA_MEM_ADDR_BITS-1:0]  data_mem_raddr,
+    input wire [DATA_WIDTH-1:0]                             data_mem_rdata,
+    output wire [THREAD_INDEX_BITS+DATA_MEM_ADDR_BITS-1:0]  data_mem_waddr,
+    output wire [DATA_WIDTH-1:0]                            data_mem_wdata,
+    output wire                                             data_mem_we,
+
     // Misc
     input wire                          clk
 );
+
+    localparam DATA_BYTE_ADDR_BITS = $clog2(DATA_WIDTH / 8);
+
 
     wire [THREAD_INDEX_BITS+DATA_MEM_ADDR_BITS-1:0] addr;
     wire [DATA_WIDTH-1:0]                           wdata;
@@ -40,7 +50,6 @@ module mem1_stage
 
     wire [DATA_WIDTH-1:0]                           bram_out_data;
 
-    localparam DATA_BYTE_ADDR_BITS = $clog2(DATA_WIDTH / 8);
 
     assign addr = {in_thread_index, in_immediate[DATA_MEM_ADDR_BITS+DATA_BYTE_ADDR_BITS-1:DATA_BYTE_ADDR_BITS]};
     assign wdata = in_data;
@@ -50,17 +59,23 @@ module mem1_stage
     assign out_write_back_flag = in_load_word_flag | in_increment_flag;
 
 
-    // We here just re-use the register file module as memory
-    register_file #(
-        .DATA_WIDTH(DATA_WIDTH),
-        .REG_INDEX_BITS(DATA_MEM_ADDR_BITS),
-        .THREAD_INDEX_BITS(THREAD_INDEX_BITS)
-    ) data_memory (
-        .in_raddr(addr),
-        .in_waddr(addr),
-        .in_wdata(wdata),
-        .in_we(we_flag),
-        .out_rdata(bram_out_data),
-        .clk(clk)
-    );
+    assign data_mem_raddr = addr;
+    assign data_mem_waddr = addr;
+    assign data_mem_wdata = wdata;
+    assign data_mem_we = we_flag;
+    assign bram_out_data = data_mem_rdata;
+
+    // // We here just re-use the register file module as memory
+    // register_file #(
+    //     .DATA_WIDTH(DATA_WIDTH),
+    //     .REG_INDEX_BITS(DATA_MEM_ADDR_BITS),
+    //     .THREAD_INDEX_BITS(THREAD_INDEX_BITS)
+    // ) data_memory (
+    //     .in_raddr(addr),
+    //     .in_waddr(addr),
+    //     .in_wdata(wdata),
+    //     .in_we(we_flag),
+    //     .out_rdata(bram_out_data),
+    //     .clk(clk)
+    // );
 endmodule

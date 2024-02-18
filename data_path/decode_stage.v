@@ -16,6 +16,8 @@ module decode_stage
 
     // Writeback Inputs 
     input wire                              in_write_back_enable_flag,
+    input wire [REG_INDEX_BITS-1:0]         in_write_back_reg_index,
+    input wire [THREAD_INDEX_BITS-1:0]      in_write_back_thread_index,
     input wire [DATA_WIDTH-1:0]             in_write_back_data,
 
     // Pipeline outputs
@@ -27,6 +29,14 @@ module decode_stage
     output wire [DATA_WIDTH-1:0]            out_reg_data,
 
     output wire [THREAD_INDEX_BITS-1:0]     out_thread_index,
+
+    // Register file access
+    input wire  [DATA_WIDTH-1:0]                        reg_access_rdata,
+
+    output wire [REG_INDEX_BITS+THREAD_INDEX_BITS-1:0]  reg_access_raddr,
+    output wire [REG_INDEX_BITS+THREAD_INDEX_BITS-1:0]  reg_access_waddr,
+    output wire [DATA_WIDTH-1:0]                        reg_access_wdata,
+    output wire                                         reg_access_we,
 
     // Misc
     input wire clk // We need a clock because the register file lives inside this module
@@ -57,18 +67,25 @@ module decode_stage
     wire [REG_INDEX_BITS+THREAD_INDEX_BITS-1:0] reg_addr;
     assign reg_addr = {in_thread_index, register};
 
-    register_file #(
-        .DATA_WIDTH(DATA_WIDTH),
-        .REG_INDEX_BITS(REG_INDEX_BITS),
-        .THREAD_INDEX_BITS(THREAD_INDEX_BITS)
-    ) register_file_instance(
-        .in_raddr(reg_addr),
-        .in_waddr(reg_addr),
-        .in_wdata(in_write_back_data),
-        .in_we(in_write_back_enable_flag),
-        .out_rdata(out_reg_data),
-        .clk(clk)
-    );
+    assign reg_access_raddr = reg_addr;
+    assign reg_access_wdata = in_write_back_data;
+    assign reg_access_waddr = { in_write_back_thread_index, in_write_back_reg_index };
+    assign reg_access_we = in_write_back_enable_flag;
+
+    assign out_reg_data = reg_access_rdata;
+
+    // register_file #(
+    //     .DATA_WIDTH(DATA_WIDTH),
+    //     .REG_INDEX_BITS(REG_INDEX_BITS),
+    //     .THREAD_INDEX_BITS(THREAD_INDEX_BITS)
+    // ) register_file_instance(
+    //     .in_raddr(reg_addr),
+    //     .in_waddr(reg_addr),
+    //     .in_wdata(in_write_back_data),
+    //     .in_we(in_write_back_enable_flag),
+    //     .out_rdata(out_reg_data),
+    //     .clk(clk)
+    // );
 
 
 endmodule
