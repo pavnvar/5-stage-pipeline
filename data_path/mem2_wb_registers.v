@@ -17,7 +17,7 @@ module mem2_wb_registers
     output reg                          out_write_back_flag,
     output reg [REG_INDEX_BITS-1:0]     out_reg_index,
     output reg [THREAD_INDEX_BITS-1:0]  out_thread_index,
-    output wire [DATA_WIDTH-1:0]        out_data,
+    output reg [DATA_WIDTH-1:0]         out_data,
 
     // Misc
     input wire                         clk,

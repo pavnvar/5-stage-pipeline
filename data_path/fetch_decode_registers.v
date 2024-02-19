@@ -11,6 +11,7 @@ module fetch_decode_registers
     input wire [THREAD_INDEX_BITS-1:0]  in_thread_index,
 
     // Pipeline Outputs
+    output reg                           out_instruction_valid_flag,
     output wire [INSTR_WIDTH-1:0]        out_instruction,
     output reg  [THREAD_INDEX_BITS-1:0]  out_thread_index,
 
@@ -22,7 +23,12 @@ module fetch_decode_registers
     assign out_instruction = in_instruction;
 
     always@(posedge clk) begin
-        out_thread_index <= in_thread_index;
+        if (reset) begin
+            out_instruction_valid_flag <= 0;
+        end else begin
+            out_thread_index <= in_thread_index;
+            out_instruction_valid_flag <= 1;
+        end
     end
 
 endmodule

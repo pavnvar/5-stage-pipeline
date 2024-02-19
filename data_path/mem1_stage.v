@@ -15,20 +15,17 @@ module mem1_stage
     input wire                          in_load_word_flag,
     input wire                          in_store_word_flag,
     input wire [IMMEDIATE_WIDTH-1:0]    in_immediate,
-
     input wire [THREAD_INDEX_BITS-1:0]  in_thread_index,
-
     input wire [REG_INDEX_BITS-1:0]     in_reg_index,
-
-    input wire [DATA_WIDTH-1:0]         in_data,
+    input wire [DATA_WIDTH-1:0]         in_reg_data,
 
     // Pipeline outputs
     output wire                         out_write_back_flag,
+    output wire                         out_load_word_flag,
     output wire [REG_INDEX_BITS-1:0]    out_reg_index,
-
     output wire [THREAD_INDEX_BITS-1:0] out_thread_index,
-
-    output wire [DATA_WIDTH-1:0]        out_data,
+    output wire [DATA_WIDTH-1:0]        out_reg_data,
+    output wire [DATA_WIDTH-1:0]        out_bram_data,
 
     // Data memory interface
     output wire [THREAD_INDEX_BITS+DATA_MEM_ADDR_BITS-1:0]  data_mem_raddr,
@@ -48,22 +45,22 @@ module mem1_stage
     wire [DATA_WIDTH-1:0]                           wdata;
     wire                                            we_flag;
 
-    wire [DATA_WIDTH-1:0]                           bram_out_data;
-
-
     assign addr = {in_thread_index, in_immediate[DATA_MEM_ADDR_BITS+DATA_BYTE_ADDR_BITS-1:DATA_BYTE_ADDR_BITS]};
-    assign wdata = in_data;
+    assign wdata = in_reg_data;
     assign we_flag = in_store_word_flag;
-
-    assign out_data = in_load_word_flag ? bram_out_data : in_data;
+    assign out_reg_data = in_reg_data;
+    assign out_bram_data = data_mem_rdata;
+    assign out_reg_index = in_reg_index;
+    assign out_thread_index = in_thread_index;
     assign out_write_back_flag = in_load_word_flag | in_increment_flag;
+    assign out_load_word_flag = in_load_word_flag;
 
 
     assign data_mem_raddr = addr;
     assign data_mem_waddr = addr;
     assign data_mem_wdata = wdata;
     assign data_mem_we = we_flag;
-    assign bram_out_data = data_mem_rdata;
+
 
     // // We here just re-use the register file module as memory
     // register_file #(

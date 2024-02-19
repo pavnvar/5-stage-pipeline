@@ -11,6 +11,7 @@ module decode_stage
 )
 (
     // Pipeline Inputs
+    input wire                              in_instruction_valid_flag,
     input wire [INSTR_WIDTH-1:0]            in_instruction,
     input wire [THREAD_INDEX_BITS-1:0]      in_thread_index,
 
@@ -52,15 +53,15 @@ module decode_stage
     assign opcode = in_instruction[5:0];
 
     wire [4:0] register;
-    assign register = in_instruction[11:6];
+    assign register = in_instruction[10:6];
 
     wire [15:0] immediate;
-    assign immediate = in_instruction[31:16];
+    assign immediate = in_instruction[26:11];
 
     assign out_immediate        = immediate;
-    assign out_increment_flag   = opcode == 6'b000001;
-    assign out_load_word_flag   = opcode == 6'b000010;
-    assign out_store_word_flag  = opcode == 6'b000011;
+    assign out_increment_flag   = in_instruction_valid_flag && (opcode == 6'b000001);
+    assign out_load_word_flag   = in_instruction_valid_flag && (opcode == 6'b000010);
+    assign out_store_word_flag  = in_instruction_valid_flag && (opcode == 6'b000011);
     assign out_reg_index        = register;
     assign out_thread_index = in_thread_index;
 

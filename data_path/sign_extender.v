@@ -2,8 +2,8 @@
 
 module sign_extender
 #(
-    INPUT_WIDTH  = 16,
-    OUTPUT_WIDTH = 64
+    parameter INPUT_WIDTH  = 16,
+    parameter OUTPUT_WIDTH = 64
 )
 (
     input wire  [INPUT_WIDTH-1:0]   in_data,

@@ -10,9 +10,11 @@ module mem2_stage
 (
     // Pipeline inputs
     input wire                          in_write_back_flag,
+    input wire                          in_load_word_flag,
     input wire [REG_INDEX_BITS-1:0]     in_reg_index,
     input wire [THREAD_INDEX_BITS-1:0]  in_thread_index,
-    input wire [DATA_WIDTH-1:0]         in_data,
+    input wire [DATA_WIDTH-1:0]         in_reg_data,
+    input wire [DATA_WIDTH-1:0]         in_bram_data,
 
     // Pipeline outputs
     output wire                         out_write_back_flag,
@@ -24,6 +26,6 @@ module mem2_stage
     assign out_write_back_flag = in_write_back_flag;
     assign out_reg_index = in_reg_index;
     assign out_thread_index = in_thread_index;
-    assign out_data = in_data;
+    assign out_data = in_load_word_flag ? in_bram_data : in_reg_data;
 
 endmodule

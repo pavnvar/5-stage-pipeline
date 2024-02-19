@@ -2,13 +2,13 @@
 
 module risc_processor
 #(
-    PC_WIDTH = 8,
-    INSTR_WIDTH = 32,
-    THREAD_INDEX_BITS = 3,
-    IMMEDIATE_WIDTH = 16,
-    DATA_WIDTH = 32,
-    REG_INDEX_BITS = 5,
-    DATA_MEM_ADDR_BITS = 8
+    parameter PC_WIDTH = 8,
+    parameter INSTR_WIDTH = 32,
+    parameter THREAD_INDEX_BITS = 3,
+    parameter IMMEDIATE_WIDTH = 16,
+    parameter DATA_WIDTH = 64,
+    parameter REG_INDEX_BITS = 5,
+    parameter DATA_MEM_ADDR_BITS = 8
 )
 (
     // Register file interface
@@ -19,7 +19,7 @@ module risc_processor
     output wire                                             reg_access_we,
 
     // Instruction memory interface
-    output wire [PC_WIDTH-1:0]                              instr_mem_pc,
+    output wire [THREAD_INDEX_BITS+PC_WIDTH-1:0]            instr_mem_pc,
     input wire  [INSTR_WIDTH-1:0]                           instr_mem_instruction,
 
     // Data memory interface
@@ -48,6 +48,7 @@ module risc_processor
     wire [THREAD_INDEX_BITS-1:0]    fetch_out_thread_index;
 
     // Decode stage inputs
+    wire                            decode_in_instruction_valid_flag;
     wire [INSTR_WIDTH-1:0]          decode_in_instruction;
     wire [THREAD_INDEX_BITS-1:0]    decode_in_thread_index;
     wire                            decode_in_write_back_enable_flag;
@@ -107,20 +108,25 @@ module risc_processor
     wire                            mem1_in_store_word_flag;
     wire [IMMEDIATE_WIDTH-1:0]      mem1_in_immediate;
     wire [REG_INDEX_BITS-1:0]       mem1_in_reg_index;
-    wire [DATA_WIDTH-1:0]           mem1_in_data;
+    wire [DATA_WIDTH-1:0]           mem1_in_reg_data;
     wire [THREAD_INDEX_BITS-1:0]    mem1_in_thread_index;
 
     // Mem1 stage outputs
     wire                            mem1_out_write_back_flag;
+    wire                            mem1_out_load_word_flag;
     wire [REG_INDEX_BITS-1:0]       mem1_out_reg_index;
     wire [THREAD_INDEX_BITS-1:0]    mem1_out_thread_index;
-    wire [DATA_WIDTH-1:0]           mem1_out_data;
+    wire [DATA_WIDTH-1:0]           mem1_out_reg_data;
+    wire [DATA_WIDTH-1:0]           mem1_out_bram_data;
+
 
     // Mem2 stage inputs
     wire                            mem2_in_write_back_flag;
+    wire                            mem2_in_load_word_flag;
     wire [REG_INDEX_BITS-1:0]       mem2_in_reg_index;
     wire [THREAD_INDEX_BITS-1:0]    mem2_in_thread_index;
-    wire [DATA_WIDTH-1:0]           mem2_in_data;
+    wire [DATA_WIDTH-1:0]           mem2_in_reg_data;
+    wire [DATA_WIDTH-1:0]           mem2_in_bram_data;
 
     // Mem2 stage outputs
     wire                            mem2_out_write_back_flag;
@@ -156,6 +162,7 @@ module risc_processor
         .INSTR_WIDTH(INSTR_WIDTH),
         .THREAD_INDEX_BITS(THREAD_INDEX_BITS)
     ) fetch_decode_registers_instance(
+        .out_instruction_valid_flag(decode_in_instruction_valid_flag),
         .in_instruction(fetch_out_instruction),
         .in_thread_index(fetch_out_thread_index),
         .out_instruction(decode_in_instruction),
@@ -171,6 +178,7 @@ module risc_processor
         .THREAD_INDEX_BITS(THREAD_INDEX_BITS),
         .INSTR_WIDTH(INSTR_WIDTH)
     ) decode_stage_instance(
+        .in_instruction_valid_flag(decode_in_instruction_valid_flag),
         .in_instruction(decode_in_instruction),
         .in_thread_index(decode_in_thread_index),
 
@@ -298,7 +306,7 @@ module risc_processor
         .out_immediate          (mem1_in_immediate),
         .out_thread_index       (mem1_in_thread_index),
         .out_reg_index          (mem1_in_reg_index),
-        .out_data               (mem1_in_data),
+        .out_data               (mem1_in_reg_data),
         .clk                    (clk),
         .reset                  (reset)
     );
@@ -316,7 +324,7 @@ module risc_processor
         .in_immediate               (mem1_in_immediate),
         .in_thread_index            (mem1_in_thread_index),
         .in_reg_index               (mem1_in_reg_index),
-        .in_data                    (mem1_in_data),
+        .in_reg_data                (mem1_in_reg_data),
 
         .data_mem_raddr             (data_mem_raddr),
         .data_mem_rdata             (data_mem_rdata),
@@ -325,9 +333,11 @@ module risc_processor
         .data_mem_we                (data_mem_we),
 
         .out_write_back_flag        (mem1_out_write_back_flag),
+        .out_load_word_flag         (mem1_out_load_word_flag),
         .out_reg_index              (mem1_out_reg_index),
         .out_thread_index           (mem1_out_thread_index),
-        .out_data                   (mem1_out_data),
+        .out_reg_data               (mem1_out_reg_data),
+        .out_bram_data              (mem1_out_bram_data),
         .clk                        (clk)
     );
 
@@ -338,14 +348,18 @@ module risc_processor
     ) mem1_mem2_registers_instance(
 
         .in_write_back_flag         (mem1_out_write_back_flag),
+        .in_load_word_flag          (mem1_out_load_word_flag),
         .in_reg_index               (mem1_out_reg_index),
         .in_thread_index            (mem1_out_thread_index),
-        .in_data                    (mem1_out_data),
+        .in_reg_data                (mem1_out_reg_data),
+        .in_bram_data               (mem1_out_bram_data),
 
         .out_write_back_flag        (mem2_in_write_back_flag),
+        .out_load_word_flag         (mem2_in_load_word_flag),
         .out_reg_index              (mem2_in_reg_index),
         .out_thread_index           (mem2_in_thread_index),
-        .out_data                   (mem2_in_data),
+        .out_reg_data               (mem2_in_reg_data),
+        .out_bram_data              (mem2_in_bram_data),
 
         .clk                        (clk),
         .reset                      (reset)
@@ -357,9 +371,11 @@ module risc_processor
         .THREAD_INDEX_BITS(THREAD_INDEX_BITS)
     ) mem2_stage_instance(
         .in_write_back_flag             (mem2_in_write_back_flag),
+        .in_load_word_flag              (mem2_in_load_word_flag),
         .in_reg_index                   (mem2_in_reg_index),
         .in_thread_index                (mem2_in_thread_index),
-        .in_data                        (mem2_in_data),
+        .in_reg_data                    (mem2_in_reg_data),
+        .in_bram_data                   (mem2_in_bram_data),
         .out_write_back_flag            (mem2_out_write_back_flag),
         .out_reg_index                  (mem2_out_reg_index),
         .out_thread_index               (mem2_out_thread_index),
@@ -391,5 +407,14 @@ module risc_processor
     assign decode_in_write_back_data            = wb_in_data;
     assign decode_in_write_back_reg_index       = wb_in_reg_index;
     assign decode_in_write_back_thread_index    = wb_in_thread_index;
+
+    // Increment thread index
+    always @(posedge clk) begin
+        if (reset) begin
+            thread_index <= 0;
+        end else begin
+            thread_index <= thread_index + 1;
+        end
+    end
 
 endmodule

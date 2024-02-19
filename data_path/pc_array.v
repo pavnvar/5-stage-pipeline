@@ -2,8 +2,8 @@
 
 module pc_array
 #(
-    THREAD_INDEX_BITS = 3,
-    PC_WIDTH = 8
+    parameter THREAD_INDEX_BITS = 3,
+    parameter PC_WIDTH = 8
 )
 (
     input wire [THREAD_INDEX_BITS-1:0]  in_thread_index,
